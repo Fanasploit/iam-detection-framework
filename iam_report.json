@@ -1,0 +1,68 @@
+{
+  "report_metadata": {
+    "framework": "IAM Misconfiguration Detection Framework",
+    "project": "Hybrid Cloud Pentesting \u2014 WB7103/WB7104",
+    "account_id": "218708247036",
+    "region": "eu-west-2",
+    "scan_timestamp": "2026-09-01T08:21:18Z",
+    "total_findings": 6,
+    "critical": 6,
+    "high": 0
+  },
+  "findings": [
+    {
+      "check": "Unrestricted iam:PassRole",
+      "severity": "CRITICAL",
+      "entity_type": "IAM User",
+      "entity_name": "Fanasploit-user",
+      "detail": "iam:PassRole granted on Resource: * via action(s) ['*']. Allows passing any IAM role to any AWS service. Demonstrated exploit: attach admin role to EC2 and retrieve credentials via Instance Metadata Service.",
+      "mitre_attack": "T1078 (Valid Accounts) / T1548 (Abuse Elevation Control)",
+      "stride_category": "Elevation of Privilege"
+    },
+    {
+      "check": "Unrestricted iam:PassRole",
+      "severity": "CRITICAL",
+      "entity_type": "IAM User",
+      "entity_name": "lab-victim-passrole",
+      "detail": "iam:PassRole granted on Resource: * via action(s) ['iam:PassRole', 'ec2:RunInstances', 'ec2:DescribeInstances', 'ec2:CreateTags']. Allows passing any IAM role to any AWS service. Demonstrated exploit: attach admin role to EC2 and retrieve credentials via Instance Metadata Service.",
+      "mitre_attack": "T1078 (Valid Accounts) / T1548 (Abuse Elevation Control)",
+      "stride_category": "Elevation of Privilege"
+    },
+    {
+      "check": "Unrestricted iam:PassRole",
+      "severity": "CRITICAL",
+      "entity_type": "IAM User",
+      "entity_name": "lab-wildcard-user",
+      "detail": "iam:PassRole granted on Resource: * via action(s) ['iam:*']. Allows passing any IAM role to any AWS service. Demonstrated exploit: attach admin role to EC2 and retrieve credentials via Instance Metadata Service.",
+      "mitre_attack": "T1078 (Valid Accounts) / T1548 (Abuse Elevation Control)",
+      "stride_category": "Elevation of Privilege"
+    },
+    {
+      "check": "Unrestricted iam:PassRole",
+      "severity": "CRITICAL",
+      "entity_type": "IAM User",
+      "entity_name": "lab-wildcard-user",
+      "detail": "iam:PassRole granted on Resource: * via action(s) ['*']. Allows passing any IAM role to any AWS service. Demonstrated exploit: attach admin role to EC2 and retrieve credentials via Instance Metadata Service.",
+      "mitre_attack": "T1078 (Valid Accounts) / T1548 (Abuse Elevation Control)",
+      "stride_category": "Elevation of Privilege"
+    },
+    {
+      "check": "Wildcard IAM Policy",
+      "severity": "CRITICAL",
+      "entity_type": "IAM User",
+      "entity_name": "lab-wildcard-user",
+      "detail": "Action(s) ['iam:*'] granted on Resource: *. Grants full IAM control \u2014 principal can attach AdministratorAccess to themselves in a single API call. Demonstrated exploit: aws iam attach-user-policy with AdministratorAccess.",
+      "mitre_attack": "T1484 (Domain Policy Modification)",
+      "stride_category": "Elevation of Privilege, Tampering"
+    },
+    {
+      "check": "Role Chaining Path",
+      "severity": "CRITICAL",
+      "entity_type": "IAM Role",
+      "entity_name": "lab-chain-role-b",
+      "detail": "Role lab-chain-role-a is trusted to assume lab-chain-role-b. lab-chain-role-b holds: ['AdministratorAccess']. CRITICAL: lab-chain-role-b has AdministratorAccess \u2014 this chain leads to full admin privileges.",
+      "mitre_attack": "T1548 (Abuse Elevation Control Mechanism)",
+      "stride_category": "Elevation of Privilege"
+    }
+  ]
+}
