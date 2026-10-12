@@ -1,10 +1,10 @@
 # IAM Misconfiguration Detection Framework
 
-A threat-model-driven Python detection framework for AWS IAM misconfigurations, developed as part of an MSc Cyber Security work-based project at the University of Chester (WB7103/WB7104).
+A Python tool for automatically detecting AWS IAM misconfigurations that can lead to privilege escalation. Built as part of an MSc Cyber Security project at the University of Chester, where I simulated real-world IAM attacks in an isolated lab environment and then built this tool to detect them..
 
-## Project Overview
+## What it does 
 
-Cloud IAM misconfiguration is the leading cause of cloud security incidents. This framework automatically detects three high-severity IAM misconfigurations that were demonstrated through hands-on attack simulation in an isolated AWS lab environment:
+IAM misconfigurations are one of the most common causes of AWS breaches. This tool scans your AWS account and flags three high-severity issues:
 
 | Attack Pattern | STRIDE | MITRE ATT&CK |
 |---|---|---|
@@ -40,7 +40,7 @@ The script will:
 
 ## Required AWS Permissions
 
-The script only makes read-only API calls. Deploy with a least-privilege role holding:
+Read-only access only — the script never modifies anything. Minimum permissions needed:
 - `iam:ListUsers`
 - `iam:GetUserPolicy`
 - `iam:ListUserPolicies`
@@ -52,12 +52,12 @@ The script only makes read-only API calls. Deploy with a least-privilege role ho
 
 ## Sample Output
 
-See `iam_report.json` for a sample report generated against the lab environment.
+`iam_report.json` in this repo contains real output from a scan of the lab environment used during the attack simulation phase.
 
 ## Ethical Notice
 
-This framework is intended for use against AWS accounts you own or have explicit written authorisation to test. All development and testing was conducted in isolated student lab accounts with no connection to production systems.
+Only use this against AWS accounts you own or have explicit written permission to test. All development and testing was done in isolated student lab accounts with no connection to production systems.
 
 ## Author
 
-Akin — MSc Cyber Security, University of Chester (2025/26)
+Akindele Fanami — MSc Cyber Security, University of Chester (2026)
